@@ -63,7 +63,7 @@ This is start
 ?3-2-1 1
 ?3-2-2 2
 *4-3-1 1 was chosen
-*5-4-0 ...
+*4-3-0 ...
 ```
 - Before using answer options (?), It is strictly necessary to use +
 - You can set a timeout before the output message using `@time@` (doesn't work in `?`)
