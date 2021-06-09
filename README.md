@@ -19,7 +19,7 @@ Larger example:
 0-This is start
 *1-0-0 First (*) message
 *1-0-0 Second (*) message
-*1-0-0 Third (*) message
+*1-0-0 @3@ Third (*) message with 3 seconds timeout
 +2-1-0 This is the (+) message before the choice
 ?3-2-1 Option 1
 ?3-2-2 Option 2
@@ -66,6 +66,7 @@ This is start
 *5-4-0 ...
 ```
 - Before using answer options (?), It is strictly necessary to use +
+- You can set a timeout before the output message using `@time@` (doesn't work in `?`)
 
 ## Needed binaries:
 ```
