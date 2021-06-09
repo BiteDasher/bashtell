@@ -68,6 +68,8 @@ This is start
 ```
 - Before using answer options (?), It is strictly necessary to use +
 - You can set a timeout before the output message using `@time@` (doesn't work in `?`)
+- You can save the current progress and load it. To save, just press `Ctrl + C`
+- To load progress, type `-l` or `--load` after the name of the game file
 
 ## Needed binaries:
 ```

@@ -1,4 +1,18 @@
 #!/bin/bash
+if [[ "$1" == -h || "$1" == --help ]]; then
+	echo "usage: bashtell FILE [options]
+
+    Options:
+        -l --load	Load progress
+	-h --help	Show this message
+
+bashtell allows you to create simple text novels"
+	exit 0
+fi
+if ! [ -e "$1" ]; then
+	echo "File '$1' not found"
+	exit 1
+fi
 savegame() {
 	if [[ -z "$prepare" ]]; then
 		export savedata="$step-$var"
