@@ -2,7 +2,7 @@
 An engine for creating short stories written in bash
 
 ## Possible output characteristics
-Total possible values for strings: 4
+Total possible values for strings: 4 \
 Possible values:
 - `*` - Text output.  Most often used to display multiple lines.
 - `+` - The text that will be displayed before the selection
