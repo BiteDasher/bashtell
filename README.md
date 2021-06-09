@@ -66,3 +66,12 @@ This is start
 *5-4-0 ...
 ```
 - Before using answer options (?), It is strictly necessary to use +
+
+## Needed binaries:
+```
+bash
+base64
+grep
+tail
+tr
+```
