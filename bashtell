@@ -1,6 +1,6 @@
 #!/bin/bash
 if [[ "$1" == -h || "$1" == --help ]]; then
-	echo "usage: bashtell FILE [options]
+	echo "usage: bashtell [-h] FILE [-l]
 
     Options:
         -l --load	Load progress
