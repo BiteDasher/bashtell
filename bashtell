@@ -61,16 +61,19 @@ while :; do
 	case "$line" in
 	'*'*) ques=0
 	      $sleep
+	      echo="${echo//##/\\n  }"
 	      echo -e "\e[0;32m< \e[0m$echo"
 	      unlink=1
 	      ;;
 	'/'*) ques=0
 	      $sleep
+	      echo="${echo//##/\\n     }"
 	      echo -e "\e[0;31m<=== \e[m$echo"
 	      exit 0
 	      ;;
 	'+'*) ques=0
 	      $sleep
+	      echo="${echo//##/\\n     }"
 	      echo -e "\e[0;33m<... \e[0m$echo"
 	      prepare=1
 	      ;;
@@ -79,6 +82,7 @@ while :; do
 	      alu=${line#*-}
 	      alu=${alu#*-}
 	      alu=${alu%% *}
+	      echo="${echo//##/\\n   }"
 	      choice+="$alu: $echo@"
 	      ;;
 	esac
