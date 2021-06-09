@@ -1,0 +1,91 @@
+#!/bin/bash
+savegame() {
+	if [[ -z "$prepare" ]]; then
+		export savedata="$step-$var"
+	fi
+}
+echosave() {
+	echo ''
+	echo -n 'SAVE DATA: '
+	echo "$savedata" | base64 -w 0
+	echo ''
+	exit 0
+}
+trap echosave SIGINT
+prompt="$(echo -e "\e[0;34m>\e[0m")"
+start="$(read -r __start < "$1"; echo "$__start")"
+step=0
+var=0
+if [[ "$2" == -l || "$2" == --load ]]; then
+	read -rp "Save data: " base64
+	base64="$(echo "$base64" | base64 -d)"
+	if [ "$?" != 0 ]; then
+		echo "invalid save data"
+		exit 1
+	fi
+	step="${base64%-*}"
+	var="${base64#*-}"
+fi
+echo "${start#*-}"
+echo ''
+while :; do
+	if [ "$prepare" == 1 ]; then
+		var='[[:digit:]]*'
+		unset prepare
+	fi
+	steps="$(grep -o "[*/+?][[:digit:]]*-$step-$var .*" "$1")"
+	while read -r line; do
+	echo="${line#* }"
+	time="${echo%@*}"
+	time="${time#*@}"
+	if [[ "$time" == [0-9]* ]]; then
+	sleep="sleep $time"
+	echo="${echo#* }"
+	else
+	sleep=":"
+	fi
+	case "$line" in
+	'*'*) ques=0
+	      $sleep
+	      echo -e "\e[0;32m< \e[0m$echo"
+	      unlink=1
+	      ;;
+	'/'*) ques=0
+	      $sleep
+	      echo -e "\e[0;31m<=== \e[m$echo"
+	      exit 0
+	      ;;
+	'+'*) ques=0
+	      $sleep
+	      echo -e "\e[0;33m<... \e[0m$echo"
+	      prepare=1
+	      ;;
+	'?'*) prepare=1
+	      ques=1
+	      alu=${line#*-}
+	      alu=${alu#*-}
+	      alu=${alu%% *}
+	      choice+="$alu: $echo@"
+	      ;;
+	esac
+	done <<<"$steps"
+	if [ "$ques" == 1 ]; then
+		bonk="$(echo -e "$choice" | tr "@" "\n")"
+		echo -e "$bonk"
+		read -rp "$prompt " ilu
+		while [ -z "$(echo "$bonk" | grep -x "$ilu: .*")" ]; do
+		echo "invalid choice"
+		read -rp "$prompt " ilu
+		done
+		var="$ilu"
+		unset prepare
+		unset choice
+	fi
+	if [ "$unlink" == 1 ]; then
+		var=0
+		unset unlink
+	fi
+	line="$(echo "$steps" | tail -n 1)"
+ 	_step="${line%%-*}"; step="${_step//[?+*\/]/}"
+	savegame
+done
