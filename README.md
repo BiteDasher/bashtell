@@ -19,7 +19,7 @@ Larger example:
 0-This is start
 *1-0-0 First (*) message
 *1-0-0 Second (*) message##With beautiful tab
-*1-0-0 @3@ Third (*) message with 3 seconds timeout @
+*1-0-0 @@3 Third (*) message with 3 seconds timeout @@
 +2-1-0 This is the (+) message before the choice
 ?3-2-1 Option 1
 ?3-2-2 Option 2
@@ -46,7 +46,7 @@ This is start
 < First (*) message
   With beautiful tab
 < Second (*) message
-< Third (*) message with 3 seconds timeout @
+< Third (*) message with 3 seconds timeout @@
 
 <... This is the (+) message before the choice
 1: Option 1
@@ -73,7 +73,7 @@ This is start
 *4-3-0 ...
 ```
 - Before using answer options (`?`), It is strictly necessary to use `+`
-- You can set a timeout before the output message using `@time@` (doesn't work in `?`)
+- You can set a timeout before the output message using `@@time ` (doesn't work in `?`)
 - You can save the current progress and load it. To save, just press `Ctrl + C`
 - To load progress, type `-l` or `--load` after the name of the game file
 - Use `##` symbols (as in the example) to form neat lines in the text (it helps if you need more than one line in one message)

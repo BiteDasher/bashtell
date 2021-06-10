@@ -50,8 +50,8 @@ while :; do
 	steps="$(grep -o "[*/+?][[:digit:]]*-$step-$var .*" "$1")"
 	while read -r line; do
 	echo="${line#* }"
-	time="${echo#@*}"
-	time="${time%%@*}"
+	time="${echo#@@*}"
+	time="${time%% *}"
 	if [[ "$time" == [0-9]* ]]; then
 	sleep="sleep $time"
 	echo="${echo#* }"
