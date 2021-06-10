@@ -98,10 +98,12 @@ while :; do
 		var="$ilu"
 		unset prepare
 		unset choice
+		echo ''
 	fi
 	if [ "$unlink" == 1 ]; then
 		var=0
 		unset unlink
+		echo ''
 	fi
 	line="$(echo "$steps" | tail -n 1)"
  	_step="${line%%-*}"; step="${_step//[?+*\/]/}"
