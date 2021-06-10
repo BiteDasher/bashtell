@@ -25,9 +25,7 @@ echosave() {
 	echo ''
 	exit 0
 }
-trap echosave SIGINT
 prompt="$(echo -e "\e[0;34m>\e[0m")"
-start="$(read -r __start < "$1"; echo "$__start")"
 step=0
 var=0
 if [[ "$2" == -l || "$2" == --load ]]; then
@@ -40,6 +38,8 @@ if [[ "$2" == -l || "$2" == --load ]]; then
 	step="${base64%-*}"
 	var="${base64#*-}"
 fi
+trap echosave SIGINT
+start="$(read -r __start < "$1"; echo "$__start")"
 echo "${start#*-}"
 echo ''
 while :; do
