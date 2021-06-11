@@ -79,6 +79,7 @@ This is start
 - Use `##` symbols (as in the example) to form neat lines in the text (it helps if you need more than one line in one message)
 - The transition to a new line is carried out after: the last message with `*` and after answering the question (`?`)
 - You cannot use the `@@` character combination in `?`
+- Main rule: one step - one symbol - unlimited lines (One symbol is given per step.  There can be as many lines as necessary for a step.)
 
 ## Needed binaries:
 ```
