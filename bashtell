@@ -29,7 +29,7 @@ prompt="$(echo -e "\e[0;34m>\e[0m")"
 step=0
 var=0
 if [[ "$2" == -l || "$2" == --load ]]; then
-	read -rp "Save data: " base64
+	read -r -p "Save data: " base64
 	base64="$(echo "$base64" | base64 -d)"
 	if [ "$?" != 0 ]; then
 		echo "invalid save data"
@@ -83,17 +83,18 @@ while :; do
 	      alu=${alu#*-}
 	      alu=${alu%% *}
 	      echo="${echo//##/\\n   }"
-	      choice+="$alu: $echo@"
+	      choice+="$alu: $echo@@"
 	      ;;
 	esac
 	done <<<"$steps"
 	if [ "$ques" == 1 ]; then
-		bonk="$(echo -e "$choice" | tr "@" "\n")"
+		bonk="${choice%@@*}"
+		bonk="${bonk//@@/\\n}"
 		echo -e "$bonk"
-		read -rp "$prompt " ilu
-		while [ -z "$(echo "$bonk" | grep -x "$ilu: .*")" ]; do
+		read -r -p "$prompt " ilu
+		while [ -z "$(echo -e "$bonk" | grep -x "$ilu: .*")" ]; do
 		echo "invalid choice"
-		read -rp "$prompt " ilu
+		read -r -p "$prompt " ilu
 		done
 		var="$ilu"
 		unset prepare

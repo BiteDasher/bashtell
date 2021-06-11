@@ -78,6 +78,7 @@ This is start
 - To load progress, type `-l` or `--load` after the name of the game file
 - Use `##` symbols (as in the example) to form neat lines in the text (it helps if you need more than one line in one message)
 - The transition to a new line is carried out after: the last message with `*` and after answering the question (`?`)
+- You cannot use the `@@` character combination in `?`
 
 ## Needed binaries:
 ```
@@ -85,5 +86,4 @@ bash
 base64
 grep
 tail
-tr
 ```
