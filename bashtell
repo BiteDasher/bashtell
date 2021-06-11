@@ -25,6 +25,19 @@ echosave() {
 	echo ''
 	exit 0
 }
+gosleep() {
+	local __null __plus
+	__null=0
+	__plus="$1"
+	while ((__null < __plus)); do
+		echo -n -e '\r     '; sleep 0.1
+		echo -n -e '\r  \e[1m.\e[0m'; sleep 0.3
+		echo -n -e '\r  \e[1m..\e[0m'; sleep 0.3
+		echo -n -e '\r  \e[1m...\e[0m'; sleep 0.3
+		((__null++))
+	done
+	echo -n -e '\r'
+}
 prompt="$(echo -e "\e[0;34m>\e[0m")"
 step=0
 var=0
@@ -49,14 +62,14 @@ while :; do
 	fi
 	steps="$(grep -o "[*/+?][[:digit:]]*-$step-$var .*" "$1")"
 	while read -r line; do
-	echo="${line#* }"
-	time="${echo#@@*}"
-	time="${time%% *}"
+		echo="${line#* }"
+		time="${echo#@@*}"
+		time="${time%% *}"
 	if [[ "$time" == [0-9]* ]]; then
-	sleep="sleep $time"
-	echo="${echo#* }"
+		sleep="gosleep $time"
+		echo="${echo#* }"
 	else
-	sleep=":"
+		sleep=":"
 	fi
 	case "$line" in
 	'*'*) ques=0
@@ -93,8 +106,8 @@ while :; do
 		echo -e "$bonk"
 		read -r -p "$prompt " ilu
 		while [ -z "$(echo -e "$bonk" | grep -x "$ilu: .*")" ]; do
-		echo "invalid choice"
-		read -r -p "$prompt " ilu
+			echo "invalid choice"
+			read -r -p "$prompt " ilu
 		done
 		var="$ilu"
 		unset prepare
