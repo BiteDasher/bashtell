@@ -63,11 +63,14 @@ while :; do
 	steps="$(grep -o "[*/+?][[:digit:]]*-$step-$var .*" "$1")"
 	while read -r line; do
 		echo="${line#* }"
+	if [ -z "${echo%%@@*}" ]; then
 		time="${echo#@@*}"
 		time="${time%% *}"
+	fi
 	if [[ "$time" == [0-9]* ]]; then
 		sleep="gosleep $time"
 		echo="${echo#* }"
+		unset time
 	else
 		sleep=":"
 	fi
