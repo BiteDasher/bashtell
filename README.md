@@ -80,6 +80,18 @@ This is start
 - The transition to a new line is carried out after: the last message with `*` and after answering the question (`?`)
 - You cannot use the `@@` character combination in `?`
 - Main rule: one step - one symbol - unlimited lines (One symbol is given per step.  There can be as many lines as necessary for a step.)
+- When using `*`, you need to use different steps to answer the question (`?`)
+```
+-Hello
+*1-0-0 Hello
++2-1-0 1 or 2
+?3-2-1 1
+?3-2-2 2
+*4-3-1 1
+*5-3-2 2
+/6-4-0 1
+/7-5-0 2
+```
 
 ## Needed binaries:
 ```
